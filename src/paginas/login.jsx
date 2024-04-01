@@ -61,8 +61,8 @@ export function Login() {
         const { sub, username, iat, exp } = jwtDecode(access_token);
         const user = { sub, username, iat, exp };
         // const { user } = jwtDecode(access_token);
-        navigate("dashboard/userstablas");
-       /*  if (user.prioridad === 0) {
+        // navigate("dashboard/userstablas");
+        /* if (user.prioridad === 0) {
           navigate("updatepassword");
         } else if (user.prioridad === 1) {
           if (user.nivel === 1) {
