@@ -27,7 +27,6 @@ import Grid from "@mui/material/Unstable_Grid2";
 
 import portadalogin from "../assets/portadalogin.jpg";
 
-
 export function Login() {
   const apiKey = import.meta.env.VITE_BASE_URL_BACKEND;
   const navigate = useNavigate();
@@ -58,11 +57,11 @@ export function Login() {
       if (response.status === 200 || response.status === 201) {
         setLoginError(null);
         const { access_token } = response.data;
-        const { sub, username, iat, exp } = jwtDecode(access_token);
-        const user = { sub, username, iat, exp };
+        const { sub, username, camb_contra } = jwtDecode(access_token);
+        const user = { sub, username, camb_contra };
         // const { user } = jwtDecode(access_token);
         // navigate("dashboard/userstablas");
-        /* if (user.prioridad === 0) {
+        if (user.camb_contra === false) {
           navigate("updatepassword");
         } else if (user.prioridad === 1) {
           if (user.nivel === 1) {
@@ -72,7 +71,7 @@ export function Login() {
           } else if (user.nivel === 9) {
             navigate("dashboardclient/proyectos");
           }
-        } */
+        }
         console.log("hola");
         console.log(jwtDecode(access_token));
         console.log(user.sub);
@@ -114,7 +113,7 @@ export function Login() {
           }}
         >
           <CardActionArea>
-            <CardMedia sx={{ height: 130 }} image={portadalogin}  />
+            <CardMedia sx={{ height: 130 }} image={portadalogin} />
             <CardContent>
               <Typography
                 className="text-center text-c600"

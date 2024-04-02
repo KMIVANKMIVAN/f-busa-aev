@@ -6,7 +6,7 @@ import { ErrorPage } from "./paginas/errorpage";
 import { Dashboard } from "./paginas/dashboard";
 import { DashboardClient } from "./paginas/dashboardclient";
 import { UsersTablas } from "./paginas/dashboard/userstablas";
-// import {  } from "./";
+import { UpdatePassword } from "./paginas/updatepassword";
 // import {  } from "./";
 // import {  } from "./";
 
@@ -16,11 +16,11 @@ const router = createBrowserRouter([
     element: <Login />,
     errorElement: <ErrorPage />,
   },
-  /* {
+  {
     path: "/updatepassword",
     element: <UpdatePassword />,
     errorElement: <ErrorPage />,
-  }, */
+  },
   {
     path: "dashboard",
     element: (
