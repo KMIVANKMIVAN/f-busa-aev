@@ -35,13 +35,12 @@ export function UsersTablas() {
   const classes = useStyles();
   const columns = [
     { id: "id", label: "ID", minWidth: 50 },
-    { id: "estado", label: "ESTADO", minWidth: 50 },
-    { id: "nombre_usuario", label: "USUARIO", minWidth: 150 },
     { id: "nombres", label: "NOMBRES", minWidth: 50 },
-    { id: "apellidos", label: "APELLIDOS", minWidth: 250 },
-    { id: "ci", label: "CI", minWidth: 50 },
+    { id: "apellidos", label: "APELLIDOS", minWidth: 50 },
+    { id: "ci", label: "CI", minWidth: 150 },
+    { id: "complemento", label: "COMPLEMENTO", minWidth: 250 },
+    { id: "correo", label: "CORREO", minWidth: 50 },
     { id: "complemento", label: "COMPLEMENTO", minWidth: 50 },
-    { id: "correo", label: "CORRREO", minWidth: 50 },
     { id: "es_activo", label: "ACTIVO", minWidth: 50 },
     // { id: "last_login", label: "LAST LOGIN", minWidth: 50 },
   ];

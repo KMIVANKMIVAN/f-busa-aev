@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { guardarToken } from "../auth/auth";
-import { guardarUserId } from "../utils/userdata";
+import { guardarUserId, guardarRoles } from "../utils/userdata";
 
 import { jwtDecode } from "jwt-decode";
 
@@ -52,32 +52,22 @@ export function Login() {
     e.preventDefault();
     try {
       const response = await axios.post(loginUrl, formData);
-      console.log("hola");
 
       if (response.status === 200 || response.status === 201) {
         setLoginError(null);
-        const { access_token } = response.data;
-        const { sub, username, camb_contra } = jwtDecode(access_token);
-        const user = { sub, username, camb_contra };
-        // const { user } = jwtDecode(access_token);
-        // navigate("dashboard/userstablas");
+        const { tk } = response.data;
+        const { sub, username, camb_contra, roles } = jwtDecode(tk);
+        const user = { sub, username, camb_contra, roles };
         if (user.camb_contra === false) {
           navigate("updatepassword");
-        } else if (user.prioridad === 1) {
-          if (user.nivel === 1) {
-            navigate("dashboard/userstablas");
-          } else if (user.nivel === 40) {
-            navigate("dashboardclient/busafirmar");
-          } else if (user.nivel === 9) {
-            navigate("dashboardclient/proyectos");
-          }
+          // } else if (arraysSonIguales(user.roles, [1, 2, 3])) {
+        } else if (roles.some((role) => [1, 2, 3].includes(role))) {
+          navigate("dashboard/userstablas");
         }
-        console.log("hola");
-        console.log(jwtDecode(access_token));
-        console.log(user.sub);
+        console.log(jwtDecode(tk));
         guardarUserId(user.sub);
-        // guardarUserNivel(user.nivel);
-        guardarToken(access_token);
+        guardarRoles(user.roles);
+        guardarToken(tk);
       }
     } catch (error) {
       if (error.response) {

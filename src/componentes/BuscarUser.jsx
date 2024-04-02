@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import ButtonGroup from '@mui/material/ButtonGroup';
-import Box from '@mui/material/Box';
+import ButtonGroup from "@mui/material/ButtonGroup";
+import Box from "@mui/material/Box";
 
 import axios from "axios";
 import { obtenerToken } from "../auth/auth";
@@ -49,18 +49,9 @@ export function BuscarUser() {
     setBuscar(value);
   };
 
-  /*  const prevCount = useRef(count);
-
-  useEffect(() => {
-    if (prevCount.current !== count) {
-      prevCount.current = count;
-      handleSearch();
-    }
-  }, [count]); */
-
   const handleSearch = async () => {
     try {
-      const url = `${apiKey}/usuarios/buscar/${buscar}`;
+      const url = `${apiKey}/usuarios/buscarci/${buscar}`;
       const token = obtenerToken();
       const headers = {
         Authorization: `Bearer ${token}`,
@@ -93,43 +84,24 @@ export function BuscarUser() {
   };
   const columns = [
     { id: "id", label: "ID", minWidth: 50 },
-    { id: "actualizar", label: "Opciones", minWidth: 100, align: "center" },
-    { id: "es_activo", label: "ESTADO", minWidth: 50 },
-    { id: "nombre_usuario", label: "USUARIO", minWidth: 150 },
+    { id: "actualizar", label: "ACTUALIZAR", minWidth: 100, align: "center" },
+    {
+      id: "habilitardes",
+      label: "DESHABILITADO / HABILITADO",
+      minWidth: 100,
+      align: "center",
+    },
     { id: "nombres", label: "NOMBRES", minWidth: 50 },
-    { id: "apellidos", label: "APELLIDOS", minWidth: 250 },
-    { id: "ci", label: "CI", minWidth: 50 },
+    { id: "apellidos", label: "APELLIDOS", minWidth: 50 },
+    { id: "ci", label: "CI", minWidth: 150 },
+    { id: "complemento", label: "COMPLEMENTO", minWidth: 250 },
+    { id: "correo", label: "CORREO", minWidth: 50 },
     { id: "complemento", label: "COMPLEMENTO", minWidth: 50 },
-    { id: "correo", label: "CORRREO", minWidth: 50 },
-    // { id: "es_activo", label: "ACTIVO", minWidth: 50 },
+    { id: "es_activo", label: "ACTIVO", minWidth: 50 },
     // { id: "last_login", label: "LAST LOGIN", minWidth: 50 },
   ];
 
   const rows = datoscontratoData;
-
-  /*  const AcordeonUserWrapper = ({
-    isVisible,
-    userId,
-    urltable,
-    onHide,
-    selectedHabilitado,
-  }) => {
-    useEffect(() => {
-      if (isVisible) {
-      }
-    }, [isVisible, userId, urltable]);
-
-    return (
-      isVisible && (
-        <AcordeonUser
-          userId={userId}
-          urltable={urltable}
-          selectedHabilitado={selectedHabilitado}
-          hideActualizarUser={() => onHide(false)}
-        />
-      )
-    );
-  }; */
 
   return (
     <>

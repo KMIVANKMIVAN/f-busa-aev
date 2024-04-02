@@ -82,15 +82,23 @@ export function UpdatePassword() {
           confirmContrasenia: formData.confirmContrasenia,
         };
         const response = await axios.patch(url, data, { headers });
-        if (response.status === 200) {
-          console.log("Contraseña actualizada con éxito");
-          window.location.href = "/";
-        } else {
-          console.error("Error al actualizar la contraseña");
-        }
+
+        window.location.href = "/";
       } catch (error) {
-        setError("No ingresó la contraseña anterior");
-        console.error("Error:", error);
+        if (error.response) {
+          const { status, data } = error.response;
+          if (status === 400) {
+            setError(`RS: ${data.error}`);
+          } else if (status === 401) {
+            setError(`RS: ${data.error}`);
+          } else if (status === 500) {
+            setError(`RS: ${data.error}`);
+          }
+        } else if (error.request) {
+          setError("RF: No se pudo obtener respuesta del servidor");
+        } else {
+          setError("RF: Error al enviar la solicitud");
+        }
       }
     } else {
       setError2("Las contraseñas no coinciden");
@@ -130,7 +138,7 @@ export function UpdatePassword() {
                       <TextField
                         id="contrasenia"
                         name="contrasenia"
-                        type={showPassword ? "text" : "contrasenia"}
+                        type={showPassword ? "text" : "password"}
                         label="Contraseña"
                         variant="outlined"
                         required
@@ -159,7 +167,7 @@ export function UpdatePassword() {
                       <TextField
                         id="confirmContrasenia"
                         name="confirmContrasenia"
-                        type={showPassword ? "text" : "contrasenia"}
+                        type={showPassword ? "text" : "password"}
                         label="Actualizar contraseña"
                         variant="outlined"
                         required
