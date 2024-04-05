@@ -8,4 +8,7 @@ export default defineConfig({
     port: 3051,
     host: "192.168.1.5",
   }, */
+  server: {
+    host: "10.10.1.158",
+  },
 });
